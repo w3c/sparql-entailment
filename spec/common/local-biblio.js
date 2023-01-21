@@ -35,6 +35,17 @@ var localBibliography = {
     status: "Team Submission",
     publisher: "W3C"
   },
+  SAFETY: {
+    title: "Saftety of recursive horn clauses with infinite relations",
+    href: "http://arxiv.org/abs/cs.LO/9809032",
+    authors: [
+      "R. Ramakrishnan",
+      "F. Bancilhon",
+      "A. Silberschatz"
+    ],
+    date: "1987",
+    publisher: "ACM New York"
+  },
   "RDF12-CONCEPTS": {
     "authors": [
         "Richard Cyganiak",
