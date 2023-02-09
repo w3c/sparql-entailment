@@ -17,7 +17,7 @@
         edDraftURI:           "https://w3c.github.io/sparql-entailment/spec/",
         testSuiteURI:         "https://w3c.github.io/rdf-tests/",
         shortName:            "sparql12-entailment",
-        copyrightStart:       "2008",
+        copyrightStart:       "2012",
          
         github:               "https://github.com/w3c/sparql-entailment",
         wgPublicList:         "public-rdf-star-wg",
@@ -45,7 +45,7 @@
       };
     </script>
 
-    <style type="text/css">
+    <style>
       @import url("local.css");
 
       /* ReSpec */
@@ -161,7 +161,7 @@
           <h4>Namespaces</h4>
           <p>Examples assume the following namespace prefix bindings unless otherwise stated:</p>
           <div style="text-align: left;">
-            <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+            <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing:5px; border-width: 1px">
               <tbody>
                 <tr>
                   <th>Prefix</th>
@@ -201,9 +201,9 @@
           and <em>RDF-B</em> the set of all <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> in RDF graphs.</p>
           <p>The set of <span class="definedTerm">RDF Terms</span>, <em>RDF-T</em>, is <em>I ∪ RDF-L ∪ RDF-B</em>.</p>
           <p>The set of query variables is denoted as <em>V</em> and <em>V</em> is assumed to be countable, infinite, and disjoint from <em>RDF-T</em>. A triple pattern is a member of the set:</p>
-          <dl>
-            <dd><em>(RDF-T ∪ V) x (I ∪ V) x (RDF-T ∪ V),</em></dd>
-          </dl>
+          <blockquote>
+            <em>(RDF-T ∪ V) x (I ∪ V) x (RDF-T ∪ V),</em>
+          </blockquote>
           <p>A basic graph pattern (BGP) is a set of triple patterns.</p>
           <p>A <em>pattern instance mapping</em> P is the combination of an RDF instance mapping σ and solution mapping μ. For a BGP <code>x</code>, <em>P</em>(<code>x</code>) denotes the result of
           replacing blank nodes <code>b</code> in <code>x</code> for which σ is defined with σ(<code>b</code>) and all variables <code>v</code> in <code>x</code> for which μ is defined with
@@ -369,7 +369,7 @@
       infinite set of axiomatic triples and the entailment regime specifies conditions that address the fourth condition on extensions of basic graph pattern matching. Further explanations are given
       in the informative sections following the main definition of the regime.</p>
       <div style="text-align: left;">
-        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
           <tbody>
             <tr>
               <th>Name</th>
@@ -433,7 +433,7 @@
       conditions (C1) and (C2), which are to a large extent shared among all the defined entailment regimes. Possible differences or additional constraints for the following regimes are defined in
       the respective sections.</p>
       <section id="bnodes">
-        <h3>Blank Nodes in the Queried Graph</h3><span name="C1-Restriction" id="C1-Restriction"></span>
+        <h3>Blank Nodes in the Queried Graph</h3><span id="C1-Restriction"></span>
         <p>The <a href="#condition3">third condition for extensions of basic graph pattern matching</a> requires that if blank node names are returned as bindings for a variable, then the same blank
         node name occurs in different solutions only if it corresponds to the same blank node in the graph. To illustrate why this is required, consider the following graphs, which are also
         illustrated in Figure 2:</p>
@@ -760,7 +760,7 @@ ex:writesBook rdfs:subPropertyOf ex:writes .</pre>
       RDF and they are repeated here so that the description of the entailment regime is self-contained. Note that, as apposed to the general <a href="#condition1">condition 1</a>, in this entailment
       regime the definition of the scoping graph also covers the case when the queried graph is RDFS-inconsistent.</p>
       <div style="text-align: left;">
-        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
           <tbody>
             <tr>
               <th>Name</th>
@@ -871,7 +871,7 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
       </section>
     </section>
     <section id="DEntRegime">
-      <h2>D-Entailment Regime</h2><span name="d-entailment" id="d-entailment"></span>
+      <h2>D-Entailment Regime</h2><span id="d-entailment"></span>
       <p>The D-entailment regime is defined for datatyped interpretations, which give semantics to datatypes. A <a data-cite="RDF12-CONCEPTS#section-Datatypes">datatype</a> is an
       entity characterized by a set of character strings called lexical forms and a mapping from that set to a set of values. Formally, a datatype d is defined by three items:</p>
       <ol class="enumar">
@@ -886,7 +886,7 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
       range of the lexical mapping (the value space). Thus a canonical mapping selects one lexical representation for each value in the value space. The <em>canonical representation</em> of a value
       in the value space of a datatype is the lexical representation associated with that value by the datatype's canonical mapping.</p>
       <section id="CanonicalLit">
-        <h3>The D-Entailment Regime</h3><span name="CanonicalLiteral" id="CanonicalLiteral"></span>
+        <h3>The D-Entailment Regime</h3><span id="CanonicalLiteral"></span>
         <p>It is possible to define one datatype as a refinement of another one. For example, in the [[[XMLSCHEMA-2]]] specification [[XMLSCHEMA-2]], the datatype
         <code>long</code> is derived from the datatype <code>integer</code>, which is itself derived from <code>decimal</code>. The datatype <code>decimal</code> is a primitive type, i.e., it is not
         a refinement of another datatype. The canonical representation of a data value does, however, not define a datatype. For example, the two literals <code>"2"^^xsd:integer</code> and
@@ -909,7 +909,7 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
       corresponding data value. The use of D-entailment means that further inconsistencies could arise due to datatype clashes and the same mechanisms as for handling inconsistencies as in the RDFS
       entailment regime are applied.</p>
       <div style="text-align: left;">
-        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
           <tbody>
             <tr>
               <th>Name</th>
@@ -1024,7 +1024,7 @@ ex:s ex:p "+100"^^xsd:short .</pre>
       <p>The OWL 2 RDF-Based Semantics entailment regime assumes that queries are answered with respect to an <a data-cite="OWL2-RDF-BASED-SEMANTICS#def-owldatatypemap">OWL 2
       RDF-Based datatype map</a> D.</p>
       <div style="text-align: left;">
-        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
           <tbody>
             <tr>
               <th>Name</th>
@@ -1108,7 +1108,7 @@ ex:s ex:p "+100"^^xsd:short .</pre>
         extended with an ontology header to become well-formed.</p>
       </section>
       <section id="OWLRDFBSRestrictions">
-        <h3>Restriction on Solutions</h3><span name="C2-RDF-Based" id="C2-RDF-Based"></span>
+        <h3>Restriction on Solutions</h3><span id="C2-RDF-Based"></span>
         <p>In this section the restrictions on solutions are explained. As the previously defined regimes, a Skolemization of the queried graph and the BGP is used to limit answers that just differ
         in blank node labels (C1). An explanation for this restriction is given in the <a href="#C1-Restriction">General Notes</a> section. Under OWL 2 RDF-Based Semantics the axiomatic triples are
         not included and owl2V-Minus could equally be replaced by owl2V. The lexical representation for data values are restricted as explained for the case of
@@ -1150,7 +1150,7 @@ ex:s ex:p "+100"^^xsd:short .</pre>
           problems.</p>
         </section>
         <section id="OWL2RLDS">
-          <h4>The OWL 2 RL Profile</h4><span name="OWL2RL" id="OWL2RL"></span>
+          <h4>The OWL 2 RL Profile</h4><span id="OWL2RL"></span>
           <p>OWL 2 RL defines a syntactic subset of OWL 2 DL, which is amenable to <a data-cite="OWL2-PROFILES#Profile_Specification_3">implementation using rule-based
           technologies</a>.</p>
         </section>
@@ -1261,7 +1261,7 @@ _:x rdf:type owl:Restriction ;
         </ol>
         <p>Such axioms are called <em>non-logical axioms</em>, whereas axioms that do carry semantics under OWL 2 Direct Semantics are called <em>logical axioms</em>.</p>
         <section id="OWLDSImports">
-          <h4>OWL Import Directives</h4><span name="OWLImports" id="OWLImports"></span>
+          <h4>OWL Import Directives</h4><span id="OWLImports"></span>
           <p>OWL provides an import directive, which allows one ontology to incorporate axioms from another ontology. Thus, if the queried RDF graph G contains a triple of the form</p>
           <pre class="data">ont owl:imports imported .</pre>
           <p>where <code>ont</code> is the ontology IRI or a blank node that identifies the ontology, and <code>imported</code> is the IRI of the imported ontology, then the
@@ -1272,7 +1272,7 @@ _:x rdf:type owl:Restriction ;
           graph G into the ontology structure O(G) the directly and indirectly imported axioms are taken into account.</p>
         </section>
         <section id="OWLDSExtGrammar">
-          <h4>Extended Grammar for OWL 2 Direct Semantics BGPs</h4><span name="extendedStructuralSpec" id="extendedStructuralSpec"></span>
+          <h4>Extended Grammar for OWL 2 Direct Semantics BGPs</h4><span id="extendedStructuralSpec"></span>
           <p>SPARQL 1.1 Query [[SPARQL12-QUERY]] is only defined for basic graph patterns using a triple-based syntax. For OWL 2 Direct Semantics, an alternative syntax for
           BGPs based on the functional-style syntax or other popular OWL syntaxes seems natural, but is not part of this specification.</p>
           <p>Since the OWL 2 Direct Semantics is defined in terms of OWL objects, it is necessary to map from the triple-based BGP representation into an OWL object representation that additionally
@@ -1329,7 +1329,7 @@ _:x rdf:type owl:Restriction ;
       <section id="OWLDSEntRegime">
         <h3>The OWL 2 Direct Semantics Entailment Regime</h3>
         <div style="text-align: left;">
-          <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+          <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
             <tbody>
               <tr>
                 <th>Name</th>
@@ -1412,9 +1412,9 @@ _:x rdf:type owl:Restriction ;
           <p>Condition (C3) requires that the axioms from the instantiated BGP satisfy the restrictions for OWL 2 DL ontologies, i.e., if they where added to the queried ontology, then the resulting
           ontology satisfies the restrictions of OWL 2 DL. These restrictions are in place to guarantee that the key reasoning tasks in OWL 2 with Direct Semantics are decidable. For example, for
           <em>owl:topDataProperty</em>, the <a data-cite="OWL2-SYNTAX#The_Restrictions_on_the_Axiom_Closure">following requirement</a> has to be met in OWL 2 DL:</p>
-          <dl>
-            <dd>The <em>owl:topDataProperty</em> property occurs in Ax only in the <strong>superDataPropertyExpression</strong> part of <strong>SubDataPropertyOf</strong> axioms.</dd>
-          </dl>
+          <blockquote>
+            The <em>owl:topDataProperty</em> property occurs in Ax only in the <strong>superDataPropertyExpression</strong> part of <strong>SubDataPropertyOf</strong> axioms.
+          </blockquote>
           <p>(C3) guarantees that the restrictions that are applied to the queried ontology are equally applied to the query. Since an OWL reasoner for the Direct Semantics might have to work with
           the axioms in O(SG) and the axioms from O(BGP) simultaneously, this condition also prevents that, for example, a non-simple property from O(SG) is used in a FunctionalObjectProperty axioms
           or within a cardinality restriction in O(BGP). This would violate the restrictions on non-simple properties.</p>
@@ -1539,7 +1539,7 @@ _:x rdf:type owl:Restriction ;
       [[RIF-CORE]] document. These additional notions of RIF satisfiability can similarly be used as the basis for more expressive RIF Core entailment regimes.</p>
       <section id="SimpeRIFCoreEntRegime">
         <h3>(Simple) RIF Core Entailment Regime</h3>
-        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
           <tbody>
             <tr>
               <th>Name</th>
@@ -1861,7 +1861,7 @@ _:x rdf:type owl:Restriction ;
       would require changes to the conditions for extensions of basic graph pattern matching in the existing SPARQL query language specification.</p>
     </section>
     <section id="PropertyPaths">
-      <h2>Entailment Regimes and Property Paths (Informative)</h2><span name="property-path" id="property-path"></span>
+      <h2>Entailment Regimes and Property Paths (Informative)</h2><span id="property-path"></span>
       <p>SPARQL 1.1 introduces <a data-cite="SPARQL12-QUERY#propertypaths">property paths</a>, which allow for using path expressions in place of the predicate of a triple pattern.
       Such path expressions describe a possible route through the active graph. For an example, assume the following data in the default graph:</p>
       <pre class="data">ex:a rdf:type ex:C .
@@ -2064,7 +2064,7 @@ ex:p2 rdfs:subPropertyOf ex:p3 .</pre>
       use an entailment regime other than simple entailment and that do support update queries should describe the system behavior in the system's documentation.</p>
     </section>
     <section id="AppendixMapping">
-      <h2>Appendix: Mapping from BGPs to the extended OWL 2 Structural Specification</h2><span name="OWL2parsingBGPs" id="OWL2parsingBGPs"></span>
+      <h2>Appendix: Mapping from BGPs to the extended OWL 2 Structural Specification</h2><span id="OWL2parsingBGPs"></span>
       <p>This appendix specifies how a legal basic graph pattern BGP of a SPARQL query can be parsed into the extension of the OWL 2 Structural specification
         [[OWL2-SYNTAX]].
         Let <code>x</code> be a variable from BGP. If BGP contains a triple <code>?x rdf:type TYPE</code> or <code>$x rdf:type TYPE</code>, where <code>TYPE</code> is one of
@@ -2138,7 +2138,7 @@ ex:p2 rdfs:subPropertyOf ex:p3 .</pre>
         specification for BGPs. The functions are initialized as in Table 9 of [[OWL2-MAPPING-TO-RDF]] for non-variable declarations (*:x is not a variable) and
         extended for the case where *:x is a variable as follows:</p>
         <div>
-          <table style="text-align: left;" cellpadding="5" border="2">
+          <table style="text-align: left; border-spacing: 5px; border-width: 2px">
             <tbody>
               <tr>
                 <th>If <em>AllDecl(G)</em> contains this declaration...</th>
@@ -2188,9 +2188,9 @@ ex:p2 rdfs:subPropertyOf ex:p3 .</pre>
       Direct Semantics are rejected with errors and, thus, do not have pattern instance mappings, the condition is satisfied.</p>
       <p>3 -- For any <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> SG and answer set {P<sub>1</sub> ... P<sub>n</sub>} for a basic graph pattern BGP, and where
       {BGP<sub>1</sub> .... BGP<sub>n</sub>} is a set of basic graph patterns all equivalent to BGP, none of which share any blank nodes with any other or with SG</p>
-      <dl>
-        <dd>SG E-entails (SG union P<sub>1</sub>(BGP<sub>1</sub>) union ... union P<sub>n</sub>(BGP<sub>n</sub>))</dd>
-      </dl>
+      <blockquote>
+        SG E-entails (SG union P<sub>1</sub>(BGP<sub>1</sub>) union ... union P<sub>n</sub>(BGP<sub>n</sub>))
+      </blockquote>
       <p>Before giving a proof, the following example illustrates how this condition could be violated. Assume SG contains the triples:</p>
       <pre class="data">ex:s ex:p _:b1 .
 _:b2 ex:p ex:o</pre>and the BGP of the query is
