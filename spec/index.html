@@ -527,7 +527,7 @@ span.cancast:hover { background-color: #ffa;
         <p>Consider, for example, the following query:</p>
         <pre class="query">SELECT ?prop WHERE { ?prop rdf:type rdf:Property }</pre>
         <p>Under simple entailment the query has an empty answer when querying the above graph. Under RDF entailment, the
-          <a data-cite="RDF12-SEMANTICS#RDFRules">RDF rule</a> <em>rdf1</em> can be used on (5) to derive the triple <code>ex:publishes rdf:type rdf:Property</code> which means that
+          RDF rule <a data-cite="RDF12-SEMANTICS#rdfD1">rdfD1</a> be used on (5) to derive the triple <code>ex:publishes rdf:type rdf:Property</code> which means that
         <code>ex:publishes</code> is a valid binding for <code>?prop</code> and will be returned as an answer for the query from a system that uses RDF entailment.</p>
         <p>The following query asks for a list of all publications:</p>
         <pre class="query">SELECT ?pub WHERE { ?pub rdf:type ex:Publication }</pre>
@@ -537,10 +537,10 @@ span.cancast:hover { background-color: #ffa;
         <code>ex:book3</code> are publications. Under simple entailment, the basic graph pattern <code>?pub rdf:type ex:Publication</code> is mapped to the queried graph and variables act as a kind
         of wild-card, e.g., by mapping <code>?pub</code> to <code>ex:book1</code> the BGP matches. RDF already supports a few inferences, but not those that are required to derive that
         <code>ex:book2</code> and <code>ex:book3</code> are publications. In order to retrieve <code>ex:book2</code> and <code>ex:book3</code>, one would need a system that supports at least RDFS
-        entailment. <a data-cite="RDF12-SEMANTICS#RDFSRules">RDFS entailment rules</a> can be used to illustrate which new consequences can be
-        derived from the given data. For example, the rule <em>rdfs9</em> can be applied to the triples (3) and (2) to derive</p>
+        entailment. <a data-cite="RDF12-SEMANTICS#rdf_entailment_patterns">RDFS entailment rules</a> can be used to illustrate which new consequences can be
+        derived from the given data. For example, the rule <a data-cite="RDF12-SEMANTICS#rdfs9">rdfs9</a> can be applied to the triples (3) and (2) to derive</p>
         <pre class="data">(6) ex:book2 rdf:type ex:Publication .</pre>
-        <p>The rule <em>rdfs3</em> can be applied to (4) and (5) to derive</p>
+        <p>The rule <a data-cite="RDF12-SEMANTICS#rdfs3">rdfs3</a> can be applied to (4) and (5) to derive</p>
         <pre class="data">(7) ex:book3 rdf:type ex:Publication .</pre>
         <p>The triples (6) and (7) can then be used to find that <code>ex:book2</code> and <code>ex:book3</code> are also answers to the query under an RDFS entailment regime.
           The [[[?OWL2-OVERVIEW]]] [[?OWL2-OVERVIEW]] allows for even more inferences and the Rule Interchange Format RIF allows for customizing the inferences by specifying
@@ -660,10 +660,10 @@ span.cancast:hover { background-color: #ffa;
               <th>Query Answers</th>
               <td>
                 <p>Let G be the queried RDF graph, BGP be a basic graph pattern, V(BGP) the set of variables in BGP, B(BGP) the set of blank nodes in BGP, SG the
-                  <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#glossSkolemization">Skolemization</a> of SG with
+                  <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of SG with
                 respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to a BGP,
                 written sk(BGP), replaces each blank node b in BGP for which sk is defined with sk(b). The set rdfV contains the URI references of the
-                <a data-cite="RDF12-SEMANTICS#RDFINTERP">RDF vocabulary</a> and rdfV-Minus is the set of URI references in rdfV minus URI references of the form <code>rdf:_n</code>
+                <a data-cite="RDF12-SEMANTICS#dfn-rdf-vocabulary">RDF vocabulary</a> and rdfV-Minus is the set of URI references in rdfV minus URI references of the form <code>rdf:_n</code>
                 with <code>n</code> in <code>{1, 2, ... }</code>.</p>
                 <p>A solution mapping μ is a <em>possible solution for BGP from G under RDF entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF-T such that
                 dom(σ)=B(BGP) and the pattern instance mapping P=(μ, σ) is such that P(BGP) are well-formed RDF triples that are RDF entailed by SG.</p>
@@ -774,10 +774,10 @@ skol:d ex:e ex:f .</pre>
         <p>Materialization is a common implementation technique (e.g., for the RDF or RDFS regime) and it is worth pointing out that new blank nodes introduced in the saturation process are not to be
         returned in the solutions. Consider the following graph and RDFS entailment</p>
         <pre class="data">ex:s ex:p "&lt;a/&gt;"^^rdf:XMLLiteral .</pre>
-        <p>If the system were to follow the <a data-cite="RDF12-SEMANTICS#RDFSRules">RDFS inference rules</a> the saturation process would result in the triples</p>
+        <p>If the system were to follow the <a data-cite="RDF12-SEMANTICS#rdfs_patterns">RDFS inference rules</a> the saturation process would result in the triples</p>
         <pre class="data">ex:s ex:p _:lit .
 _:lit rdf:type rdfs:Literal .</pre>
-        <p>being added to the graph, where <code>_:lit</code> is a blank node allocated to the literal <code>"&lt;a/&gt;"^^rdf:XMLLiteral</code>. The BGP <code>?x rdf:type rdfs:Literal</code> would
+        <p>being added to the graph, where <code>_:lit</code> is a fresh blank node associated with the literal <code>"&lt;a/&gt;"^^rdf:XMLLiteral</code>. The BGP <code>?x rdf:type rdfs:Literal</code> would
         have an empty answer. The blank node <code>_:lit</code> is not returned because it is not part of the queried graph. The Skolem function is, therefore, not defined for <code>_:lit</code> and
         a solution that maps <code>x</code> to <code>_:lit</code> will not yield a ground triple as required by (C1). Note, however, that the entailment regimes do not prescribe any particular
         implementation technique. Thus, one can use materialization in which the saturated graph contains literals in the subject position of triples or blank nodes in the predicate position in order
@@ -808,7 +808,7 @@ ex:d rdf:_1 ex:a .</pre>
             </tbody>
           </table>
         </div>
-        <p>since <code>ex:a ex:b ex:c</code> RDF entails <code>ex:b a rdf:Property</code> (see also the <a data-cite="RDF12-SEMANTICS#RDFRules">RDF entailment rule</a> <em>rdf1</em>). Further, the axiomatic triples give possible solutions such as</p>
+        <p>since <code>ex:a ex:b ex:c</code> RDF entails <code>ex:b a rdf:Property</code> (see also the <a data-cite="RDF12-SEMANTICS#rdfD1">RDF entailment rule</a> <em>rdfD1</em>). Further, the axiomatic triples give possible solutions such as</p>
         <div class="result">
           <span class="doc-ref" id="table4"></span>
           <table class="resultTable">
@@ -840,8 +840,7 @@ ex:d rdf:_1 ex:a .</pre>
             </tbody>
           </table>
         </div>
-        <p>There are even more possible answers since <code>ex:b rdf:type rdf:Property</code> RDF entails <code>_:exb1 rdf:type rdf:Property</code> for some blank node <code>_:exb1</code>
-          <a data-cite="RDF12-SEMANTICS#defallocated">allocated</a> to <code>ex:b</code>, i.e., <code>_:exb1</code> is a possible solution. As shown above, condition (C1) prevents such possible
+        <p>There are even more possible answers since <code>ex:b rdf:type rdf:Property</code> RDF entails <code>_:exb1 rdf:type rdf:Property</code> for <code>_:exb1</code> a fresh blank node, i.e., <code>_:exb1</code> is a possible solution. As shown above, condition (C1) prevents such possible
         solutions from newly introduced blank nodes to be returned as solutions. To limit the answers from the axiomatic triples condition (C2) is used:</p>
         <p>(C2) For each variable x in V(BGP), μ(x) occurs in SG or in rdfV-Minus.</p>
         <p>The possible answers μ<sub>2</sub> to μ<sub>5</sub> are considered here in greater detail. Since all these solution mappings lead to (ground) axiomatic triples when instantiating the BGP,
@@ -1046,8 +1045,8 @@ ex:writesBook rdfs:subPropertyOf ex:writes .</pre>
             </tr>
             <tr>
               <th>Inconsistency</th>
-              <td>The scoping graph is graph-equivalent to the active graph even if the active graph is <a data-cite="RDF12-SEMANTICS#RDFSINTERP">RDFS-inconsistent</a>. If the active graph is
-              <a data-cite="RDF12-SEMANTICS#RDFSINTERP">RDFS-inconsistent</a>, an implementation MAY raise a
+              <td>The scoping graph is graph-equivalent to the active graph even if the active graph is <a data-cite="RDF12-CONCEPTS#dfn-inconsistent">RDFS-inconsistent</a>. If the active graph is
+              <a data-cite="RDF12-CONCEPTS#dfn-inconsistent">RDFS-inconsistent</a>, an implementation MAY raise a
               <a data-cite="SPARQL12-PROTOCOL#select-refused">QueryRequestRefused</a> fault or issue a warning and it SHOULD generate such a fault or warning if, in the course of processing, it determines that the data or query is not compatible with the request. In
               the presence of an inconsistency the conditions on solutions still guarantee that answers are finite.</td>
             </tr>
@@ -1055,10 +1054,10 @@ ex:writesBook rdfs:subPropertyOf ex:writes .</pre>
               <th>Query Answers</th>
               <td>
                 <p>Let G be the queried RDF graph, BGP be a basic graph pattern, V(BGP) the set of variables in BGP, B(BGP) the set of blank nodes in BGP, SG the
-                  <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#glossSkolemization">Skolemization</a> of SG with
+                  <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of SG with
                 respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to a BGP,
                 written sk(BGP), replaces each blank node b in BGP for which sk is defined with sk(b). The set rdfsV contains the URI references of the
-                <a data-cite="RDF12-SEMANTICS#RDFSINTERP">RDFS vocabulary</a> and rdfsV-Minus is the set of URI references in rdfsV minus URI references of the form
+                <a data-cite="RDF12-SEMANTICS#dfn-rdfs-vocabulary">RDFS vocabulary</a> and rdfsV-Minus is the set of URI references in rdfsV minus URI references of the form
                 <code>rdf:_n</code> with <code>n</code> in <code>{1, 2, ... }</code>.</p>
                 <p>A solution mapping μ is a <em>possible solution for BGP from G under RDFS entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF-T such that
                 dom(σ)=B(BGP) and the pattern instance mapping P=(μ, σ) is such that P(BGP) are well-formed RDF triples that are RDFS entailed by SG.</p>
@@ -1091,9 +1090,9 @@ ex:writesBook rdfs:subPropertyOf ex:writes .</pre>
 (3) ex:c rdfs:subPropertyOf ex:b.
 (4) ex:d ex:c "&lt;"^^rdf:XMLLiteral .</pre>
         <p>Here we can derive an inconsistency as follows:</p>
-        <pre class="data">(5) ex:d ex:b "&lt;"^^rdf:XMLLiteral .    (e.g., by applying <a data-cite="RDF12-SEMANTICS#RDFSRules">rule rdfs7</a> to (3) and (4))
-(6) "&lt;"^^rdf:XMLLiteral rdf:type ex:a.   (e.g., by applying <a data-cite="RDF12-SEMANTICS#RDFSRules">rule rdfs3</a> to (2) and (5))
-(7) "&lt;"^^rdf:XMLLiteral rdf:type rdfs:Literal .   (e.g., by applying <a data-cite="RDF12-SEMANTICS#RDFSRules">rule rdfs9</a> to (1) and (6))</pre>
+        <pre class="data">(5) ex:d ex:b "&lt;"^^rdf:XMLLiteral .    (e.g., by applying <a data-cite="RDF12-SEMANTICS#rdfs7">rule rdfs7</a> to (3) and (4))
+(6) "&lt;"^^rdf:XMLLiteral rdf:type ex:a.   (e.g., by applying <a data-cite="RDF12-SEMANTICS#rdfs3">rule rdfs3</a> to (2) and (5))
+(7) "&lt;"^^rdf:XMLLiteral rdf:type rdfs:Literal .   (e.g., by applying <a data-cite="RDF12-SEMANTICS#rdfs9">rule rdfs9</a> to (1) and (6))</pre>
         <p>At this point, the inconsistency can be detected since <code>"&lt;"</code> is not a valid lexical form for an RDF XML literal and has to be interpreted as some element that is NOT in
         <code>rdfs:Literal</code>, but at the same time it should be of type <code>rdfs:Literal</code>. The triple derived last is characteristic for an RDFS inconsistency.</p>
         <section id="uncheckedInconsistencies">
@@ -1135,7 +1134,7 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
         <li>a non-empty set called the value space of d;</li>
         <li>a mapping from the lexical space of d to the value space of d, called the lexical-to-value mapping of d.</li>
       </ol>
-      <p>Datatyped interpretations for an RDF graph are relativized to a <a data-cite="RDF12-SEMANTICS#DTYPEINTERP">datatype map</a>: A datatype map D is a set of pairs consisting of a URI
+      <p>Datatyped interpretations for an RDF graph are relativized to a <a data-cite="RDF12-SEMANTICS#dfn-datatype-map">datatype map</a>: A datatype map D is a set of pairs consisting of a URI
       reference and a datatype such that no URI reference appears twice in the set, i.e., D can be regarded as a function from a set of URI references to a set of datatypes.</p>
       <p>While the datatypes often have a single lexical representation for each data value (i.e., each value in the datatype's value space is denoted by a single representation in its lexical
       space), this is not always the case. A <em>canonical mapping</em> is a prescribed subset of the inverse of a lexical mapping, which is one-to-one and whose domain (where possible) is the entire
@@ -1206,11 +1205,11 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
                 lexical forms; such information could, for example, be listed in supporting documentation. A canonical literal MUST be
                 defined for all literals that use a datatype from the datatype map.</p>
                 <p>Let D be the supported datatype map, G the queried RDF graph, BGP be a basic graph pattern, V(BGP) the set of variables in BGP, B(BGP) the set of blank nodes in BGP, SG the
-                <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#glossSkolemization">Skolemization</a> of
+                <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of
                 SG with respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to
                 a BGP, written sk(BGP), replaces each blank node b in BGP for which sk is defined with sk(b). The set Lit(SG) is the set of all literals <code>"lc"^^dc</code> such that
                 <code>"l"^^dt</code> occurs in SG and <code>"lc"^^dc</code> is the canonical literal for <code>"l"^^dt</code>. The set dV contains the URI references of the
-                <a data-cite="RDF12-SEMANTICS#RDFSINTERP">RDFS vocabulary</a> plus the datatype names, i.e., the URI references, for the datatypes in D; dV-Minus is the set of URI
+                <a data-cite="RDF12-SEMANTICS#RDFS vocabulary">RDFS vocabulary</a> plus the datatype names, i.e., the URI references, for the datatypes in D; dV-Minus is the set of URI
                 references in dV minus URI references of the form <code>rdf:_n</code> with <code>n</code> in <code>{1, 2, ... }</code>.</p>
                 <p>A solution mapping μ is a <em>possible solution for BGP from G under D-entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF-T such that
                 dom(σ)=B(BGP) and the pattern instance mapping P=(μ, σ) is such that P(BGP) are well-formed RDF triples that are D-entailed by SG.</p>
@@ -1324,7 +1323,7 @@ ex:s ex:p "+100"^^xsd:short .</pre>
                 defined for all literals that use a datatype from the datatype map.</p>
                 <p>Let D be a finite <a data-cite="OWL2-RDF-BASED-SEMANTICS#def-owldatatypemap">OWL 2 RDF-Based datatype map</a>, G the queried RDF graph, BGP be a basic graph
                 pattern, V(BGP) the set of variables in BGP, B(BGP) the set of blank nodes in BGP, SG the <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and
-                BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#glossSkolemization">Skolemization</a> of SG with respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to
+                BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of SG with respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to
                 a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to a BGP, written sk(BGP), replaces each blank node b in BGP for which sk is defined with
                 sk(b). The set Lit(SG) is the set of all literals <code>"lc"^^dc</code> such that <code>"l"^^dt</code> occurs in SG and <code>"lc"^^dc</code> is the canonical literal for
                 <code>"l"^^dt</code>. The set owl2V contains the URI references of the <a data-cite="OWL2-RDF-BASED-SEMANTICS#table-vocab-owl">OWL 2 RDF-based vocabulary</a>, which
@@ -1627,7 +1626,7 @@ _:x rdf:type owl:Restriction ;
                   datatype lexical forms; such information could, for example, be listed in supporting documentation. A canonical literal MUST be defined for all literals that use a datatype from the datatype map.</p>
                   <p>Let G be a legal RDF graph for the entailment regime, BGP a legal basic graph pattern, V(BGP) the set of variables in BGP, SG the
                     <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, O(SG) the ontology for SG, sk a total mapping from anonymous individuals in O(SG) to IRIs
-                  from a vocabulary disjoint from the vocabulary of O(SG) and BGP, sk(O(SG)) the resulting <a data-cite="RDF12-SEMANTICS#glossSkolemization">Skolemization</a> of O(SG).
+                  from a vocabulary disjoint from the vocabulary of O(SG) and BGP, sk(O(SG)) the resulting <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of O(SG).
                   Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to a BGP, written sk(BGP), replaces each blank node b in BGP for which sk is
                   defined with sk(b). The set Lit(SG) is the set of all literals <code>"lc"^^dc</code> such that <code>"l"^^dt</code> occurs in SG and <code>"lc"^^dc</code> is the canonical literal
                   for <code>"l"^^dt</code>.</p>
@@ -1833,7 +1832,7 @@ _:x rdf:type owl:Restriction ;
               <td>
                 <p>Let G be the merge of the queried RDF graph (without the <code>rif:usedWithProfile</code> statement) along with any RDF graphs included in the referenced RIF Core document, BGP be
                 a basic graph pattern, V(BGP) the set of variables in BGP, B(BGP) the set of blank nodes in BGP, SG the <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping
-                graph</a> for G and BGP, and sk(SG) a <a data-cite="RDF12-SEMANTICS#glossSkolemization">Skolemization</a> of SG with respect to a vocabulary disjoint from the vocabulary of SG
+                graph</a> for G and BGP, and sk(SG) a <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of SG with respect to a vocabulary disjoint from the vocabulary of SG
                 and BGP. Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to a BGP, written sk(BGP), replaces each blank node b in BGP for
                 which sk is defined with sk(b).</p>
                 <p>A solution mapping μ is a <em>solution for BGP from G under RIF-Simple entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF-T such that
