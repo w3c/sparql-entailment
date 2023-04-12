@@ -348,7 +348,7 @@ span.cancast:hover { background-color: #ffa;
       <h2>Abstract</h2>
 <p>SPARQL is a query language and a protocol for data that is stored natively as RDF or viewed as RDF via middleware. The main mechanism for computing query results in SPARQL is subgraph
     matching: RDF triples in both the queried RDF data and the query pattern are interpreted as nodes and edges of directed graphs, and the resulting query graph is matched to the data graph using
-    variables as wild cards. Various W3C standards, including [[[RDF12-CONCEPTS]]] and [[[OWL2-MAPPING-TO-RDF]]], provide semantic
+    variables as wild cards. Various W3C standards, including [[[RDF12-CONCEPTS]]] [[RDF12-CONCEPTS]] and [[[OWL2-MAPPING-TO-RDF]]] [[OWL2-MAPPING-TO-RDF]], provide semantic
     interpretations for RDF graphs that allow additional RDF statements to be inferred from explicitly given assertions. Many applications that rely on these semantics require a query language such
     as SPARQL, but in order to use SPARQL, basic graph pattern matching has to be defined using semantic entailment relations instead of explicitly given graph structures. There are different
     possible ways of defining a basic graph pattern matching extension for an entailment relation. This document specifies one such way for a range of standard semantic web entailment relations. Such
@@ -543,7 +543,7 @@ span.cancast:hover { background-color: #ffa;
         <p>The rule <em>rdfs3</em> can be applied to (4) and (5) to derive</p>
         <pre class="data">(7) ex:book3 rdf:type ex:Publication .</pre>
         <p>The triples (6) and (7) can then be used to find that <code>ex:book2</code> and <code>ex:book3</code> are also answers to the query under an RDFS entailment regime.
-          The [[[OWL2-OVERVIEW]]] allows for even more inferences and the Rule Interchange Format RIF allows for customizing the inferences by specifying
+          The [[[?OWL2-OVERVIEW]]] [[?OWL2-OVERVIEW]] allows for even more inferences and the Rule Interchange Format RIF allows for customizing the inferences by specifying
         custom rule sets. The remainder of this document specifies correct answers for different entailment regimes using SPARQL's extension mechanism for Basic Graph Pattern Matching.</p>
       </section>
       <section id="bgpMatchingExtensions">
@@ -606,7 +606,7 @@ span.cancast:hover { background-color: #ffa;
         <h3>Parts of an Entailment Regime</h3>Each entailment regime is defined in a table describing the following items:
         <ul>
           <li><strong>Name</strong>: A name for the entailment regime, usually the same as the entailment relation used to define the evaluation of a basic graph pattern.</li>
-          <li><strong>IRI</strong>: The IRI for the regime, which can be used in the [[[SPARQL12-SERVICE-DESCRIPTION]]] of a SPARQL endpoint. The IRI
+          <li><strong>IRI</strong>: The IRI for the regime, which can be used in the [[[?SPARQL12-SERVICE-DESCRIPTION]]] of a SPARQL endpoint. The IRI
           for a SPARQL endpoint can be related via the property <code>sd:defaultEntailmentRegime</code> to the IRI of an entailment regime which applies per default to graphs queried via this
           endpoint. Additionally, the property <code>sd:entailmentRegime</code> can be used to relate a particular named graph with an entailment regime that is different from the otherwise used
           default entailment regime.</li>
@@ -781,7 +781,7 @@ _:lit rdf:type rdfs:Literal .</pre>
         have an empty answer. The blank node <code>_:lit</code> is not returned because it is not part of the queried graph. The Skolem function is, therefore, not defined for <code>_:lit</code> and
         a solution that maps <code>x</code> to <code>_:lit</code> will not yield a ground triple as required by (C1). Note, however, that the entailment regimes do not prescribe any particular
         implementation technique. Thus, one can use materialization in which the saturated graph contains literals in the subject position of triples or blank nodes in the predicate position in order
-        to implement complete RDFS reasoning [[HORST05]], although only mappings that instantiate the BGP into well-formed such RDF triples can constitute
+        to implement complete RDFS reasoning [[?HORST05]], although only mappings that instantiate the BGP into well-formed such RDF triples can constitute
         solutions. Instead of materializing inferences, techniques based on query rewriting are equally possible to implement the regime.</p>
       </section>
       <section id="axiomaticTriples">
@@ -1143,7 +1143,7 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
       in the value space of a datatype is the lexical representation associated with that value by the datatype's canonical mapping.</p>
       <section id="CanonicalLit">
         <h3>The D-Entailment Regime</h3><span id="CanonicalLiteral"></span>
-        <p>It is possible to define one datatype as a refinement of another one. For example, in the [[[XMLSCHEMA-2]]] specification [[XMLSCHEMA-2]], the datatype
+        <p>It is possible to define one datatype as a refinement of another one. For example, in the [[[?XMLSCHEMA11-2]]] specification [[?XMLSCHEMA11-2]], the datatype
         <code>long</code> is derived from the datatype <code>integer</code>, which is itself derived from <code>decimal</code>. The datatype <code>decimal</code> is a primitive type, i.e., it is not
         a refinement of another datatype. The canonical representation of a data value does, however, not define a datatype. For example, the two literals <code>"2"^^xsd:integer</code> and
         <code>"2"^^xsd:long</code> both represent the data value 2. This raises the question which literals should be returned in query answers. Let D be a datatype map containing
@@ -1227,9 +1227,9 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
       </div>
       <section id="canonicalRep">
         <h3>XML Schema Datatypes and Canonical Lexical Representations</h3>
-        <p>Most XML Schema Datatypes [[XMLSCHEMA-2]] can be used with the D-Entailment regime. The canonical mapping, which is defined for all XML Schema Datatypes, is used
+        <p>Most XML Schema Datatypes [[XMLSCHEMA11-2]] can be used with the D-Entailment regime. The canonical mapping, which is defined for all XML Schema Datatypes, is used
         as a means to achive finite answers. Infinite answers can otherwise occur if a datatype has infinitely many different lexical forms for a data value. For example, in the
-        <a data-cite="XMLSCHEMA-2#decimal">decimal</a> datatype from the XML Schema Datatypes all of the following lexical forms represent the same value:</p>
+        <a data-cite="XMLSCHEMA11-2#decimal">decimal</a> datatype from the XML Schema Datatypes all of the following lexical forms represent the same value:</p>
         <ul>
           <li>100.5</li>
           <li>+100.5</li>
@@ -1423,7 +1423,7 @@ ex:s ex:p "+100"^^xsd:short .</pre>
         <p>The OWL 2 RL entailment checker is slightly different in that OWL 2 RL entailment checkers work, as OWL 2 Full entailment checkers, on OWL 2 Full Ontologies, whereas the others make
         restrictions on the allowed input. The first four entailment checkers should not return <code>Unknown</code> when checking entailment on the respective allowed inputs. OWL 2 RL entailment
         checkers should not return <code>Unknown</code> under the RDF-Based Semantics if it is possible to derive <code>True</code> using the OWL 2 RL/RDF rules.</p>
-        <p>[[[SPARQL12-SERVICE-DESCRIPTION]]] can be used to describe what kind of entailment checker is used in the backgroud to answer
+        <p>[[[?SPARQL12-SERVICE-DESCRIPTION]]] can be used to describe what kind of entailment checker is used in the backgroud to answer
         SPARQL queries. In addition to specifying the used semantics by relating the IRI of the endpoint via the property <code>sd:defaultEntailmentRegime</code> or <code>sd:entailmentRegime</code>
         to the IRI of the entailment regime, one can relate the endpoint IRI via the property <code>sd:defaultSupportedEntailmentProfile</code> or <code>sd:supportedEntailmentProfile</code> to one of
         the following profile IRIs:</p>
@@ -1758,7 +1758,7 @@ _:x rdf:type owl:Restriction ;
       <section id="OWL2ProfilesDS">
         <h3>OWL 2 Entailment Checkers and Profiles</h3>
         <p>The OWL 2 Direct Semantics is not defined for arbitrary RDF graphs, but only for graphs that satisfy the OWL 2 DL constraints. The OWL 2 profiles further restrict the allowed inputs.
-        <a href="#OWL2-RDFBS-Profiles">As for the RDF-Based Semantics</a>, [[[SPARQL12-SERVICE-DESCRIPTION]]] can be used to describe
+        <a href="#OWL2-RDFBS-Profiles">As for the RDF-Based Semantics</a>, [[[?SPARQL12-SERVICE-DESCRIPTION]]] can be used to describe
         what kind of <a href="http://www.w3.org/TR/owl2-test/#Entailment_Checker">entailment checkers</a> is used in the backgroud to answer SPARQL queries. In addition to specifying the used
         semantics by relating the IRI of the endpoint via the property <code>sd:defaultEntailmentRegime</code> or <code>sd:entailmentRegime</code> to the IRI of the entailment regime, one can relate
         the endpoint IRI via the property <code>sd:defaultSupportedEntailmentProfile</code> or <code>sd:supportedEntailmentProfile</code> to one of the following profile IRIs:</p>
@@ -1893,7 +1893,7 @@ _:x rdf:type owl:Restriction ;
         <h3>Finite Answer Set Conditions (Informative)</h3>
         <p>Traditionally, one of the ways to ensure that the underlying decision problems associated with a Horn clause knowledge representation are decidable is to prevent the use of function
         symbols. RIF-Core's syntax permits built-in functions in the body of a rule. A Horn Clause query is said to be safe it it has a finite set of answers. In order to ensure that a Horn Clause
-        logic programming language is complete (i.e., it guarantees all answers to every query) it is necessary to test whether a given query is safe [[SAFETY]].</p>
+        logic programming language is complete (i.e., it guarantees all answers to every query) it is necessary to test whether a given query is safe [[?SAFETY]].</p>
         <p>Certain <a data-cite="RIF-CORE#Safeness"><strong>safety conditions</strong></a> on logic programs permit the use of cyclic references between built-in function symbols
         defined by an external procedure. RIF-Core's notion of strong safety facilitates the ability to construct a <em>finite grounding</em> which addresses both components of condition C4 regarding
         SPARQL extensions and their solution sets: uniqueness and finiteness.</p>
@@ -2314,8 +2314,8 @@ ex:p2 rdfs:subPropertyOf ex:p3 .</pre>
     </section>
     <section id="Updates">
       <h2>Entailment Regimes and Updates (Informative)</h2>
-      <p>SPARQL 1.1 also describes an update language (see [[[SPARQL12-UPDATE]]] and [[[SPARQL12-GRAPH-STORE-PROTOCOL]]]),
-        which can be used to add, modify, or delete data in an RDF graph. Support for [[[SPARQL12-UPDATE]]] and [[[SPARQL12-GRAPH-STORE-PROTOCOL]]] is optional. SPARQL endpoints that use
+      <p>SPARQL 1.1 also describes an update language (see [[?SPARQL12-UPDATE]] and [[?SPARQL12-GRAPH-STORE-PROTOCOL]]),
+        which can be used to add, modify, or delete data in an RDF graph. Support for [[?SPARQL12-UPDATE]] and [[?SPARQL12-GRAPH-STORE-PROTOCOL]] is optional. SPARQL endpoints that use
       an entailment regime other than simple entailment may support update queries, but the exact behavior of the system for such queries is not covered by this specification. SPARQL endpoints that
       use an entailment regime other than simple entailment and that do support update queries should describe the system behavior in the system's documentation.</p>
     </section>
