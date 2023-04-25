@@ -1209,7 +1209,7 @@ ex:d rdfs:range rdf:XMLLiteral . </pre>
                 SG with respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to
                 a BGP, written sk(BGP), replaces each blank node b in BGP for which sk is defined with sk(b). The set Lit(SG) is the set of all literals <code>"lc"^^dc</code> such that
                 <code>"l"^^dt</code> occurs in SG and <code>"lc"^^dc</code> is the canonical literal for <code>"l"^^dt</code>. The set dV contains the URI references of the
-                <a data-cite="RDF12-SEMANTICS#RDFS vocabulary">RDFS vocabulary</a> plus the datatype names, i.e., the URI references, for the datatypes in D; dV-Minus is the set of URI
+                <a data-cite="RDF12-SEMANTICS#dfn-rdfs-vocabulary">RDFS vocabulary</a> plus the datatype names, i.e., the URI references, for the datatypes in D; dV-Minus is the set of URI
                 references in dV minus URI references of the form <code>rdf:_n</code> with <code>n</code> in <code>{1, 2, ... }</code>.</p>
                 <p>A solution mapping μ is a <em>possible solution for BGP from G under D-entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF-T such that
                 dom(σ)=B(BGP) and the pattern instance mapping P=(μ, σ) is such that P(BGP) are well-formed RDF triples that are D-entailed by SG.</p>
