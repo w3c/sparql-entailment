@@ -527,7 +527,7 @@ span.cancast:hover { background-color: #ffa;
         <p>Consider, for example, the following query:</p>
         <pre class="query">SELECT ?prop WHERE { ?prop rdf:type rdf:Property }</pre>
         <p>Under simple entailment the query has an empty answer when querying the above graph. Under RDF entailment, the
-          RDF rule <a data-cite="RDF12-SEMANTICS#rdfD1">rdfD1</a> be used on (5) to derive the triple <code>ex:publishes rdf:type rdf:Property</code> which means that
+          RDF rule <a data-cite="RDF12-SEMANTICS#dfn-rdfd1">rdfD1</a> be used on (5) to derive the triple <code>ex:publishes rdf:type rdf:Property</code> which means that
         <code>ex:publishes</code> is a valid binding for <code>?prop</code> and will be returned as an answer for the query from a system that uses RDF entailment.</p>
         <p>The following query asks for a list of all publications:</p>
         <pre class="query">SELECT ?pub WHERE { ?pub rdf:type ex:Publication }</pre>
@@ -538,9 +538,9 @@ span.cancast:hover { background-color: #ffa;
         of wild-card, e.g., by mapping <code>?pub</code> to <code>ex:book1</code> the BGP matches. RDF already supports a few inferences, but not those that are required to derive that
         <code>ex:book2</code> and <code>ex:book3</code> are publications. In order to retrieve <code>ex:book2</code> and <code>ex:book3</code>, one would need a system that supports at least RDFS
         entailment. <a data-cite="RDF12-SEMANTICS#rdf_entailment_patterns">RDFS entailment rules</a> can be used to illustrate which new consequences can be
-        derived from the given data. For example, the rule <a data-cite="RDF12-SEMANTICS#rdfs9">rdfs9</a> can be applied to the triples (3) and (2) to derive</p>
+        derived from the given data. For example, the rule <a data-cite="RDF12-SEMANTICS#dfn-rdfs9">rdfs9</a> can be applied to the triples (3) and (2) to derive</p>
         <pre class="data">(6) ex:book2 rdf:type ex:Publication .</pre>
-        <p>The rule <a data-cite="RDF12-SEMANTICS#rdfs3">rdfs3</a> can be applied to (4) and (5) to derive</p>
+        <p>The rule <a data-cite="RDF12-SEMANTICS#dfn-rdfs3">rdfs3</a> can be applied to (4) and (5) to derive</p>
         <pre class="data">(7) ex:book3 rdf:type ex:Publication .</pre>
         <p>The triples (6) and (7) can then be used to find that <code>ex:book2</code> and <code>ex:book3</code> are also answers to the query under an RDFS entailment regime.
           The [[[?OWL2-OVERVIEW]]] [[?OWL2-OVERVIEW]] allows for even more inferences and the Rule Interchange Format RIF allows for customizing the inferences by specifying
@@ -808,7 +808,7 @@ ex:d rdf:_1 ex:a .</pre>
             </tbody>
           </table>
         </div>
-        <p>since <code>ex:a ex:b ex:c</code> RDF entails <code>ex:b a rdf:Property</code> (see also the <a data-cite="RDF12-SEMANTICS#rdfD1">RDF entailment rule</a> <em>rdfD1</em>). Further, the axiomatic triples give possible solutions such as</p>
+        <p>since <code>ex:a ex:b ex:c</code> RDF entails <code>ex:b a rdf:Property</code> (see also the <a data-cite="RDF12-SEMANTICS#dfn-rdfD1">RDF entailment rule</a> <em>rdfD1</em>). Further, the axiomatic triples give possible solutions such as</p>
         <div class="result">
           <span class="doc-ref" id="table4"></span>
           <table class="resultTable">
@@ -1090,9 +1090,9 @@ ex:writesBook rdfs:subPropertyOf ex:writes .</pre>
 (3) ex:c rdfs:subPropertyOf ex:b.
 (4) ex:d ex:c "&lt;"^^rdf:XMLLiteral .</pre>
         <p>Here we can derive an inconsistency as follows:</p>
-        <pre class="data">(5) ex:d ex:b "&lt;"^^rdf:XMLLiteral .    (e.g., by applying <a data-cite="RDF12-SEMANTICS#rdfs7">rule rdfs7</a> to (3) and (4))
-(6) "&lt;"^^rdf:XMLLiteral rdf:type ex:a.   (e.g., by applying <a data-cite="RDF12-SEMANTICS#rdfs3">rule rdfs3</a> to (2) and (5))
-(7) "&lt;"^^rdf:XMLLiteral rdf:type rdfs:Literal .   (e.g., by applying <a data-cite="RDF12-SEMANTICS#rdfs9">rule rdfs9</a> to (1) and (6))</pre>
+        <pre class="data">(5) ex:d ex:b "&lt;"^^rdf:XMLLiteral .    (e.g., by applying <a data-cite="RDF12-SEMANTICS#dfn-rdfs7">rule rdfs7</a> to (3) and (4))
+(6) "&lt;"^^rdf:XMLLiteral rdf:type ex:a.   (e.g., by applying <a data-cite="RDF12-SEMANTICS#dfn-rdfs3">rule rdfs3</a> to (2) and (5))
+(7) "&lt;"^^rdf:XMLLiteral rdf:type rdfs:Literal .   (e.g., by applying <a data-cite="RDF12-SEMANTICS#dfn-rdfs9">rule rdfs9</a> to (1) and (6))</pre>
         <p>At this point, the inconsistency can be detected since <code>"&lt;"</code> is not a valid lexical form for an RDF XML literal and has to be interpreted as some element that is NOT in
         <code>rdfs:Literal</code>, but at the same time it should be of type <code>rdfs:Literal</code>. The triple derived last is characteristic for an RDFS inconsistency.</p>
         <section id="uncheckedInconsistencies">
