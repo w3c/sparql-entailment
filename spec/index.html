@@ -516,7 +516,7 @@ span.cancast:hover { background-color: #ffa;
         <p>Consider, for example, the following query:</p>
         <pre class="query">SELECT ?prop WHERE { ?prop rdf:type rdf:Property }</pre>
         <p>Under simple entailment the query has an empty answer when querying the above graph. Under RDF entailment, the
-          RDF rule <a data-cite="RDF12-SEMANTICS#dfn-rdfd1">rdfD1</a> be used on (5) to derive the triple <code>ex:publishes rdf:type rdf:Property</code> which means that
+          RDF rule <a data-cite="RDF12-SEMANTICS#dfn-rdfd2">rdfD2</a> be used on (5) to derive the triple <code>ex:publishes rdf:type rdf:Property</code> which means that
         <code>ex:publishes</code> is a valid binding for <code>?prop</code> and will be returned as an answer for the query from a system that uses RDF entailment.</p>
         <p>The following query asks for a list of all publications:</p>
         <pre class="query">SELECT ?pub WHERE { ?pub rdf:type ex:Publication }</pre>
