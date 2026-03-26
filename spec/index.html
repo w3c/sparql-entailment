@@ -646,14 +646,16 @@ span.cancast:hover { background-color: #ffa;
             <tr>
               <th>Query Answers</th>
               <td>
-                <p>Let G be the queried RDF graph, BGP be a basic graph pattern, V(BGP) the set of variables in BGP, B(BGP) the set of blank nodes in BGP, SG the
-                  <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> for G and BGP, sk(SG) a <a data-cite="RDF12-SEMANTICS#skolemization">Skolemization</a> of SG with
-                respect to a vocabulary disjoint from the vocabulary of SG and BGP. Applying sk to a term t, written sk(t), yields sk(t) if sk is defined for t and t otherwise; applying sk to a BGP,
-                written sk(BGP), replaces each blank node b in BGP for which sk is defined with sk(b). The set rdfV contains the URI references of the
+                <p>Let G be the queried RDF graph, BGP be a basic graph pattern, V(BGP) the set of variables in BGP, and B(BGP) the set of blank nodes in BGP.
+		  Let SG(G,BGP) be a scoping graph for G with respect to BGP.
+		  Let sk be a Skolemization function mapping the blank nodes in SG to fresh IRIs -- namely to a vocabulary disjoint from the vocabulary of SG and BGP
+		  -- and to map any other RDF term to itself. 
+		  (Applying sk to a graph or BGP replaces each term b in the graph or BGP with sk(b).)
+		  The set rdfV contains the URI references of the
                 <a data-cite="RDF12-SEMANTICS#dfn-rdf-vocabulary">RDF vocabulary</a> and rdfV-Minus is the set of URI references in rdfV minus URI references of the form <code>rdf:_n</code>
                 with <code>n</code> in <code>{1, 2, ... }</code>.</p>
-                <p>A solution mapping μ is a <em>possible solution for BGP from G under RDF entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF-T such that
-                dom(σ)=B(BGP) and the pattern instance mapping P=(μ, σ) is such that P(BGP) are well-formed RDF triples that are RDF entailed by SG.</p>
+                <p>A solution mapping μ is a <em>possible solution for BGP from G under RDF entailment</em> if dom(μ) = V(BGP) and there is an RDF instance mapping σ from B(BGP) to RDF terms such that
+                dom(σ)=B(BGP) and the pattern instance mapping P=(μ, σ) is such that P(BGP) are well-formed RDF triples that are RDF entailed by SG(G,BGP).</p>
                 <p>A possible solution μ is a <em>solution for BGP from SG under RDF entailment</em> if:</p>
                 <p>(C1) The RDF triples sk(P(BGP)) are ground and RDF entailed by sk(SG).</p>
                 <p>(C2) For each variable x in V(BGP), μ(x) occurs in SG or in rdfV-Minus.</p>
