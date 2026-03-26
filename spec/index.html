@@ -553,7 +553,7 @@ span.cancast:hover { background-color: #ffa;
         of a consistent active graph are repeated below for clarity. An overview of how the different entailment regimes satisfy these conditions follows.</p>
         <ol class="enumar">
           <li><span class="doc-ref" id="condition1"></span>The <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a>, SG, corresponding to any E-consistent active graph AG is
-          uniquely specified up to <a data-cite="RDF12-CONCEPTS#section-graph-equality">RDF graph equivalence</a> and is E-equivalent to AG.</li>
+          uniquely specified up to <a data-cite="RDF12-CONCEPTS#section-graph-equality">equivalence</a> for simple entailment and is E-equivalent to AG.</li>
           <li><span class="doc-ref" id="condition2"></span>For any basic graph pattern BGP and pattern instance mapping P, P(BGP) is well-formed for E.</li>
           <li>
             <span class="doc-ref" id="condition3"></span>For any <a data-cite="SPARQL12-QUERY#BGPsparqlBNodes">scoping graph</a> SG and answer set {P<sub>1</sub> ... P<sub>n</sub>} for a
@@ -608,8 +608,12 @@ span.cancast:hover { background-color: #ffa;
     </section>
     <section id="RDFEntRegime">
       <h2>RDF Entailment Regime</h2>
-      <p>RDF entailment is closest to simple entailment in that it provides only few additional answers and RDF is not expressive enough to express inconsistencies. RDF does, however, entail an
-      infinite set of axiomatic triples and the entailment regime specifies conditions that address the fourth condition on extensions of basic graph pattern matching. Further explanations are given
+      <p>RDF entailment is closest to simple entailment in that it provides only a few additional answers.  
+	Because RDF entailment includes disjoint datatypes inconsistency is possible.  Also there is an
+      infinite set of axiomatic triples, so the entailment regime specifies conditions that address the fourth condition on extensions of basic graph pattern matching. 
+      Note that, as opposed to the general <a href="#condition1">condition 1</a>, in this entailment
+      regime the definition of the scoping graph also covers the case when the queried graph is RDFS-inconsistent.</p>
+      <p>Further explanations are given
       in the informative sections following the main definition of the regime.</p>
       <div style="text-align: left;">
         <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
@@ -641,7 +645,10 @@ span.cancast:hover { background-color: #ffa;
             </tr>
             <tr>
               <th>Inconsistency</th>
-              <td>RDF graphs are always RDF consistent and no inconsistency handling is required.</td>
+              <td>The scoping graph is graph-equivalent to the active graph even if the active graph is <a data-cite="RDF12-CONCEPTS#dfn-inconsistent">RDF-inconsistent</a>. If the active graph is
+              <a data-cite="RDF12-CONCEPTS#dfn-inconsistent">RDF-inconsistent</a>, an implementation MAY raise a
+              <a data-cite="SPARQL12-PROTOCOL#select-refused">QueryRequestRefused</a> fault or issue a warning and it SHOULD generate such a fault or warning if, in the course of processing, it determines that the data or query is not compatible with the request. In
+              the presence of an inconsistency the conditions on solutions still guarantee that answers are finite.</td>
             </tr>
             <tr>
               <th>Query Answers</th>
@@ -999,9 +1006,9 @@ ex:writesBook rdfs:subPropertyOf ex:writes .</pre>
     </section>
     <section id="RDFSEntRegime">
       <h2>RDFS Entailment Regime</h2>
-      <p>Under RDFS entailment there are not only more entailments than with just RDF, which result in possibly more query answers, but RDF graphs can also be inconsistent under RDFS interpretations.
-      Without any restrictions, this can result in infinite solutions since an inconsistent graph RDFS entails any consequence. The restrictions to guarantee finite query answers are the same as for
-      RDF and they are repeated here so that the description of the entailment regime is self-contained. Note that, as apposed to the general <a href="#condition1">condition 1</a>, in this entailment
+      <p>Under RDFS entailment there are more entailments than with just RDF, which result in possibly more query answers.  RDF graphs can again be inconsistent under RDFS interpretations.
+The restrictions to guarantee finite query answers are the same as for
+      RDF and they are repeated here so that the description of the entailment regime is self-contained. Again, as opposed to the general <a href="#condition1">condition 1</a>, in this entailment
       regime the definition of the scoping graph also covers the case when the queried graph is RDFS-inconsistent.</p>
       <div style="text-align: left;">
         <table style="border-color: rgb(0, 0, 0); border-collapse: collapse; border-spacing: 5px; border-width: 1px">
