@@ -437,17 +437,20 @@ span.cancast:hover { background-color: #ffa;
           <h4>Preliminary Definitions</h4>
           <p>This document uses the same <a data-cite="SPARQL12-QUERY#initDefinitions">definitions</a> as the
             [[[SPARQL12-QUERY]]] specification. Important terms are recaptured below for clarity. In the case of any differences, the SPARQL Query Language definitions are the normative ones.</p>
-          <p>The term <em>I</em> denotes the set of all IRIs, <em>RDF-L</em> the set of all <a data-cite="RDF12-CONCEPTS#dfn-literal">RDF Literals</a>,
-          and <em>RDF-B</em> the set of all <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a> in RDF graphs.</p>
-          <p>The set of <span class="definedTerm">RDF Terms</span>, <em>RDF-T</em>, is <em>I ∪ RDF-L ∪ RDF-B</em>.</p>
+          <p>The term <em>I</em> denotes the set of all <a data-cite="RDF12-CONCEPTS#dfn-iri">RDF IRIs</a>,
+	    <em>RDF-L</em> the set of all <a data-cite="RDF12-CONCEPTS#dfn-literal">RDF Literals</a>,
+            <em>RDF-B</em> the set of all <a data-cite="RDF12-CONCEPTS#dfn-blank-node">blank nodes</a>,
+	    and <em>RDF-TT</em> the set of all <a data-cite="RDF12-CONCEPTS#dfn-triple-term">triple terms</a>..</p>
+          <p>The set of <span class="definedTerm">RDF Terms</span>, <em>RDF-T</em>, is <em>I ∪ RDF-L ∪ RDF-B ∪ RDF-TT</em>.</p>
           <p>The set of query variables is denoted as <em>V</em> and <em>V</em> is assumed to be countable, infinite, and disjoint from <em>RDF-T</em>. A triple pattern is a member of the set:</p>
           <blockquote>
-            <em>(RDF-T ∪ V) x (I ∪ V) x (RDF-T ∪ V),</em>
+            <em>(I ∪ RDF-B ∪ V) x (I ∪ V) x (RDF-T ∪ V),</em>
           </blockquote>
           <p>A basic graph pattern (BGP) is a set of triple patterns.</p>
           <p>A <em>pattern instance mapping</em> P is the combination of an RDF instance mapping σ and solution mapping μ. For a BGP <code>x</code>, <em>P</em>(<code>x</code>) denotes the result of
           replacing blank nodes <code>b</code> in <code>x</code> for which σ is defined with σ(<code>b</code>) and all variables <code>v</code> in <code>x</code> for which μ is defined with
           μ(<code>v</code>), denoted <em>P</em>(<code>x</code>) = μ(σ(<code>x</code>)).</p>
+	  <p>SG(G, BGP), a scoping graph of G with respect to BGP, is a graph that is formed from G by uniformly replacing all blank nodes in G with ones that are in neither G nor BGP, much as is done for merging graphs. There can be many scoping graphs of G with respect to BGP, but they are all equivalent. The choice of which one to use does not matter.</p>
         </section>
         <section id="resultDesc">
           <h4>Result Descriptions</h4>
